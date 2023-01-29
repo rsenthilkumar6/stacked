@@ -8,9 +8,20 @@ class AnalyticsService {
     'stacked_cli',
   );
 
+  /// Is this the first time the tool has run?
+  bool get isFirstRun => _analytics.firstRun;
+
+  /// Will analytics data be sent?
+  bool get enabled => _analytics.enabled;
+
+  /// Enables or disables sending of analytics data.
+  void enable(bool value) {
+    _analytics.enabled = value;
+  }
+
   /// This will wait until all outstanding analytics requests have completed,
   /// or until the specified duration has elapsed.
-  Future<void> waitLastPingOrCloseAtTimeout() async {
+  Future<void> _waitLastPingOrCloseAtTimeout() async {
     await _analytics.waitForLastPing(
       timeout: const Duration(milliseconds: 200),
     );
@@ -25,7 +36,7 @@ class AnalyticsService {
       label: 'app',
       parameters: {'name': name},
     );
-    await waitLastPingOrCloseAtTimeout();
+    await _waitLastPingOrCloseAtTimeout();
   }
 
   /// Sends create bottom sheet command event
@@ -36,7 +47,7 @@ class AnalyticsService {
       label: 'bottom_sheet',
       parameters: {'name': name},
     );
-    await waitLastPingOrCloseAtTimeout();
+    await _waitLastPingOrCloseAtTimeout();
   }
 
   /// Sends create dialog command event
@@ -47,7 +58,7 @@ class AnalyticsService {
       label: 'dialog',
       parameters: {'name': name},
     );
-    await waitLastPingOrCloseAtTimeout();
+    await _waitLastPingOrCloseAtTimeout();
   }
 
   /// Sends create service command event
@@ -58,7 +69,7 @@ class AnalyticsService {
       label: 'service',
       parameters: {'name': name},
     );
-    await waitLastPingOrCloseAtTimeout();
+    await _waitLastPingOrCloseAtTimeout();
   }
 
   /// Sends create view command event
@@ -69,7 +80,7 @@ class AnalyticsService {
       label: 'view',
       parameters: {'name': name},
     );
-    await waitLastPingOrCloseAtTimeout();
+    await _waitLastPingOrCloseAtTimeout();
   }
 
   /// Sends delete service command event
@@ -80,7 +91,7 @@ class AnalyticsService {
       label: 'service',
       parameters: {'name': name},
     );
-    await waitLastPingOrCloseAtTimeout();
+    await _waitLastPingOrCloseAtTimeout();
   }
 
   /// Sends delete view command event
@@ -91,19 +102,19 @@ class AnalyticsService {
       label: 'view',
       parameters: {'name': name},
     );
-    await waitLastPingOrCloseAtTimeout();
+    await _waitLastPingOrCloseAtTimeout();
   }
 
   /// Sends generate command event
   Future<void> generateCodeEvent() async {
     await _analytics.sendEvent('command', 'generate');
-    await waitLastPingOrCloseAtTimeout();
+    await _waitLastPingOrCloseAtTimeout();
   }
 
   /// Sends update command event
   Future<void> updateCliEvent() async {
     await _analytics.sendEvent('command', 'update');
-    await waitLastPingOrCloseAtTimeout();
+    await _waitLastPingOrCloseAtTimeout();
   }
 
   /// Sends exception event
@@ -119,7 +130,7 @@ class AnalyticsService {
       label: message,
       parameters: {'stackTrace': stackTrace},
     );
-    await waitLastPingOrCloseAtTimeout();
+    await _waitLastPingOrCloseAtTimeout();
   }
 }
 

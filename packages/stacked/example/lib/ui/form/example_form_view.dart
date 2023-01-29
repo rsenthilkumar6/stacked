@@ -86,7 +86,7 @@ class ExampleFormView extends StatelessWidget with $ExampleFormView {
                   Visibility(
                     visible: viewModel.hasEmailValidationMessage,
                     child: Text(
-                      viewModel.emailValidationMessage!,
+                      viewModel.emailValidationMessage ?? '',
                       style: const TextStyle(color: Colors.red),
                     ),
                   ),
@@ -109,7 +109,7 @@ class ExampleFormView extends StatelessWidget with $ExampleFormView {
                   Visibility(
                     visible: viewModel.hasPasswordValidationMessage,
                     child: Text(
-                      viewModel.passwordValidationMessage!,
+                      viewModel.passwordValidationMessage ?? '',
                       style: const TextStyle(color: Colors.red),
                     ),
                   ),
@@ -173,7 +173,7 @@ class ExampleFormView extends StatelessWidget with $ExampleFormView {
                   Visibility(
                     visible: viewModel.showValidationMessage,
                     child: Text(
-                      viewModel.validationMessage!,
+                      viewModel.validationMessage ?? '',
                       style: const TextStyle(color: Colors.red),
                     ),
                   ),

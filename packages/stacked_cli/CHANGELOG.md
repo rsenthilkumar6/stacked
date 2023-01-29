@@ -1,3 +1,21 @@
+## 1.1.9+1
+
+- Refactor ProcessService
+- Improves version global option to be retrieved on the fly
+
+## 1.1.9
+
+- Fixes version global option
+
+## 1.1.8
+
+- Adds global option to show `stacked_cli` version
+- Adds global option to enable sending of analytics data
+- Adds global option to disable sending of analytics data
+- Adds prompt for sending analytics at first run
+- Fixes unit tests
+- Fix: Delete service command removes correct dependencies and code
+
 ## 1.1.7
 
 - Logs exception events to Google Analytics

@@ -6,8 +6,8 @@ import 'package:stacked_cli/src/services/analytics_service.dart';
 import 'package:stacked_cli/src/services/process_service.dart';
 
 class GenerateCommand extends Command {
-  final _processService = locator<ProcessService>();
   final _analyticsService = locator<AnalyticsService>();
+  final _processService = locator<ProcessService>();
 
   @override
   String get description =>
