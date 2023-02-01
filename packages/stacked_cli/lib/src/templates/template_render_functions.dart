@@ -12,10 +12,10 @@ Map<String, RenderFunction> renderFunctions = {
     final configService = locator<ConfigService>();
     return {
       kTemplatePropertyViewName: '${value.pascalCase}View',
+      kTemplatePropertyViewFileName: '${value.snakeCase}_view.dart',
       kTemplatePropertyViewModelName: '${value.pascalCase}ViewModel',
       kTemplatePropertyViewModelFileName: '${value.snakeCase}_viewmodel.dart',
       kTemplatePropertyViewFolderName: value.snakeCase,
-      kTemplatePropertyViewFileName: '${value.snakeCase}_view.dart',
       kTemplatePropertyRelativeLocatorPath: getRelativeLocatorPath(
         stackedAppFilePath: configService.stackedAppFilePath,
       ),
@@ -46,19 +46,33 @@ Map<String, RenderFunction> renderFunctions = {
     };
   },
   kTemplateNameBottomSheet: (ReCase value) {
+    final configService = locator<ConfigService>();
     return {
       kTemplatePropertySheetName: '${value.pascalCase}Sheet',
       kTemplatePropertySheetFilename: '${value.snakeCase}_sheet',
+      kTemplatePropertySheetModelName: '${value.pascalCase}SheetModel',
+      kTemplatePropertySheetModelFilename:
+          '${value.snakeCase}_sheet_model.dart',
       kTemplatePropertySheetFolderName: value.snakeCase,
       kTemplatePropertySheetType: value.camelCase,
+      kTemplatePropertyRelativeLocatorPath: getRelativeLocatorPath(
+        stackedAppFilePath: configService.stackedAppFilePath,
+      ),
     };
   },
   kTemplateNameDialog: (ReCase value) {
+    final configService = locator<ConfigService>();
     return {
       kTemplatePropertyDialogName: '${value.pascalCase}Dialog',
       kTemplatePropertyDialogFilename: '${value.snakeCase}_dialog',
+      kTemplatePropertyDialogModelName: '${value.pascalCase}DialogModel',
+      kTemplatePropertyDialogModelFilename:
+          '${value.snakeCase}_dialog_model.dart',
       kTemplatePropertyDialogFolderName: value.snakeCase,
       kTemplatePropertyDialogType: value.camelCase,
+      kTemplatePropertyRelativeLocatorPath: getRelativeLocatorPath(
+        stackedAppFilePath: configService.stackedAppFilePath,
+      ),
     };
   },
 };
