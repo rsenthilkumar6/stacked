@@ -1,3 +1,22 @@
+## 1.2.0
+
+- Adds support for `version` custom dimension
+- Adds support for `name` custom dimension
+- Sends `stacked_cli` version custom dimension on every event
+
+## 1.1.12
+
+- Changes executableName to `stacked`
+- Refactors `_handleVersion` to use PubService
+- Updates `_handleFirstRun` for prettier notification
+- Shows notification when new version is available
+
+## 1.1.11
+
+- Updates create bottom_sheet command to make use of StackedApp annotation
+- Updates create dialog command to make use of StackedApp annotation
+- Updates packages
+
 ## 1.1.10
 
 - Adds `model` flag option to create bottom_sheet command to use or not a model

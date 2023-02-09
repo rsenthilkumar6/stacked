@@ -35,14 +35,6 @@ Map<String, StackedTemplate> kCompiledStackedTemplates = {
         content: kAppTemplateMainContent,
       ),
       TemplateFile(
-        relativeOutputPath: kAppTemplateSetupDialogUiPath,
-        content: kAppTemplateSetupDialogUiContent,
-      ),
-      TemplateFile(
-        relativeOutputPath: kAppTemplateSetupBottomSheetUiPath,
-        content: kAppTemplateSetupBottomSheetUiContent,
-      ),
-      TemplateFile(
         relativeOutputPath: kAppTemplateUiHelpersPath,
         content: kAppTemplateUiHelpersContent,
       ),
@@ -99,14 +91,6 @@ Map<String, StackedTemplate> kCompiledStackedTemplates = {
         content: kAppTemplateAppContent,
       ),
       TemplateFile(
-        relativeOutputPath: kAppTemplateDialogTypePath,
-        content: kAppTemplateDialogTypeContent,
-      ),
-      TemplateFile(
-        relativeOutputPath: kAppTemplateBottomSheetTypePath,
-        content: kAppTemplateBottomSheetTypeContent,
-      ),
-      TemplateFile(
         relativeOutputPath: kAppTemplatePubspecYamlStkPath,
         content: kAppTemplatePubspecYamlStkContent,
       ),
@@ -136,25 +120,18 @@ Map<String, StackedTemplate> kCompiledStackedTemplates = {
     ],
     modificationFiles: [
       ModificationFile(
-        relativeModificationPath: 'lib/ui/setup/setup_dialog_ui.dart',
+        relativeModificationPath: 'lib/app/app.dart',
+        modificationIdentifier: '// @stacked-dialog',
+        modificationTemplate: '''StackedDialog(classType: {{dialogName}}),''',
+        modificationProblemError: 'The dialog registration should be stored in lib/app/app.dart',
+        modificationName: 'Add \'{{dialogName}}\' dependency to StackedApp annotations file',
+      ),
+      ModificationFile(
+        relativeModificationPath: 'lib/app/app.dart',
         modificationIdentifier: '// @stacked-import',
-        modificationTemplate: '''import \'package:{{packageName}}/{{{dialogsPath}}}/{{dialogFolderName}}/{{dialogFilename}}.dart\';''',
-        modificationProblemError: 'It seems your file where custom dialog builders are set is not in lib/ui/setup/setup_dialog_ui.dart. Add a stacked.json file and set \'dialog_builder_file_path\' so we can locate your file.',
-        modificationName: 'Add import for \'{{dialogName}}\' Dialog',
-      ),
-      ModificationFile(
-        relativeModificationPath: 'lib/ui/setup/setup_dialog_ui.dart',
-        modificationIdentifier: '// @stacked-dialog-builder',
-        modificationTemplate: '''DialogType.{{dialogType}}: (context, request, completer) => {{dialogName}}(completer: completer, request: request),''',
-        modificationProblemError: 'It seems your file where custom dialog builders are set is not in lib/ui/setup/setup_dialog_ui.dart. Add a stacked.json file and set \'dialog_builder_file_path\' so we can locate your file.',
-        modificationName: 'Add \'{{dialogName}}\' custom builder',
-      ),
-      ModificationFile(
-        relativeModificationPath: 'lib/enums/dialog_type.dart',
-        modificationIdentifier: '// @stacked-dialog-type',
-        modificationTemplate: '''{{dialogType}},''',
-        modificationProblemError: 'It seems your file for DialogType class is not in lib/enums/dialog_type.dart. Add a stacked.json file and set the path for \'dialog_type_file_path\' to the folder so we can locate your DialogType class.',
-        modificationName: 'Add \'{{dialogType}}\' value to DialogType',
+        modificationTemplate: '''import \'package:{{packageName}}/{{{dialogsPath}}}/{{dialogFolderName}}/{{dialogFilename}}\';''',
+        modificationProblemError: 'The dialog registration should be stored in lib/app/app.dart',
+        modificationName: 'Add import for \'{{dialogName}}\' class',
       ),
     ],
   ),
@@ -279,25 +256,18 @@ return service;
     ],
     modificationFiles: [
       ModificationFile(
-        relativeModificationPath: 'lib/ui/setup/setup_bottom_sheet_ui.dart',
+        relativeModificationPath: 'lib/app/app.dart',
+        modificationIdentifier: '// @stacked-bottom-sheet',
+        modificationTemplate: '''StackedBottomsheet(classType: {{sheetName}}),''',
+        modificationProblemError: 'The bottom sheet registration should be stored in lib/app/app.dart',
+        modificationName: 'Add \'{{sheetName}}\' dependency to StackedApp annotations file',
+      ),
+      ModificationFile(
+        relativeModificationPath: 'lib/app/app.dart',
         modificationIdentifier: '// @stacked-import',
-        modificationTemplate: '''import \'package:{{packageName}}/{{{bottomSheetsPath}}}/{{sheetFolderName}}/{{sheetFilename}}.dart\';''',
-        modificationProblemError: 'It seems your file where custom bottom sheet builders are set is not in lib/ui/setup/setup_bottom_sheet_ui.dart. Add a stacked.json file and set \'bottom_sheet_custom_builders_path\' so we can locate your file.',
-        modificationName: 'Add import for \'{{sheetName}}\' BottomSheet',
-      ),
-      ModificationFile(
-        relativeModificationPath: 'lib/enums/bottom_sheet_type.dart',
-        modificationIdentifier: '// @stacked-bottom-sheet-type',
-        modificationTemplate: '''{{sheetType}},''',
-        modificationProblemError: 'It seems your file for BottomSheetType class is not in lib/enums/bottom_sheet_type.dart. Add a stacked.json file and set the path for \'bottom_sheet_type_enums\' to the folder so we can locate your BottomSheetType class.',
-        modificationName: 'Add \'{{sheetType}}\' type to BottomSheetType',
-      ),
-      ModificationFile(
-        relativeModificationPath: 'lib/ui/setup/setup_bottom_sheet_ui.dart',
-        modificationIdentifier: '// @stacked-bottom-sheet-builder',
-        modificationTemplate: '''BottomSheetType.{{sheetType}}: (context, request, completer) => {{sheetName}}(completer: completer, request: request),''',
-        modificationProblemError: 'It seems your file where custom bottom sheet builders are set is not in lib/ui/setup/setup_bottom_sheet_ui.dart. Add a stacked.json file and set \'bottom_sheet_custom_builders_path\' so we can locate your file.',
-        modificationName: 'Add \'{{sheetName}}\' custom builder',
+        modificationTemplate: '''import \'package:{{packageName}}/{{{bottomSheetsPath}}}/{{sheetFolderName}}/{{sheetFilename}}\';''',
+        modificationProblemError: 'The bottom sheet registration should be stored in lib/app/app.dart',
+        modificationName: 'Add import for \'{{sheetName}}\' class',
       ),
     ],
   ),

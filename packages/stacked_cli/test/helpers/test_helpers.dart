@@ -9,10 +9,10 @@ import 'package:stacked_cli/src/services/config_service.dart';
 import 'package:stacked_cli/src/services/file_service.dart';
 import 'package:stacked_cli/src/services/path_service.dart';
 import 'package:stacked_cli/src/services/process_service.dart';
+import 'package:stacked_cli/src/services/pub_service.dart';
 import 'package:stacked_cli/src/services/pubspec_service.dart';
 import 'package:stacked_cli/src/services/template_service.dart';
 import 'package:stacked_cli/src/templates/template_helper.dart';
-
 // @stacked-import
 
 import '../test_constants.dart';
@@ -29,6 +29,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<ConfigService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<ProcessService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<AnalyticsService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<PubService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-service-mock
 ])
 MockFileService getAndRegisterFileService({
@@ -131,9 +132,10 @@ MockColorizedLogService getAndRegisterColorizedLogService() {
 
 MockConfigService getAndRegisterConfigService({
   String? customPath,
-  String serviceImportPath = 'lib/services',
+  String stackedAppFilePath = 'app/app.dart',
+  String serviceImportPath = 'services',
   String serviceTestHelpersImport = '../helpers/test_helpers.dart',
-  String viewImportPath = 'lib/viewmodels',
+  String viewImportPath = 'viewmodels',
   String viewTestHelpersImport = '../helpers/test_helpers.dart',
   String locatorName = 'locator',
   String registerMocksFunction = 'registerServices',
@@ -143,6 +145,7 @@ MockConfigService getAndRegisterConfigService({
   _removeRegistrationIfExists<ConfigService>();
   final service = MockConfigService();
 
+  when(service.stackedAppFilePath).thenReturn(stackedAppFilePath);
   when(service.serviceImportPath).thenReturn(serviceImportPath);
   when(service.serviceTestHelpersImport).thenReturn(
     serviceTestHelpersImport,
@@ -169,6 +172,30 @@ MockAnalyticsService getAndRegisterAnalyticsService() {
   return service;
 }
 
+MockPubService getAndRegisterPubService({
+  bool hasLatestVersion = true,
+  String currentVersion = '1.1.8',
+  String latestVersion = '1.1.11',
+}) {
+  _removeRegistrationIfExists<PubService>();
+  final service = MockPubService();
+
+  when(service.getCurrentVersion()).thenAnswer(
+    (invocation) async => currentVersion,
+  );
+
+  when(service.getLatestVersion()).thenAnswer(
+    (invocation) async => latestVersion,
+  );
+
+  when(service.hasLatestVersion()).thenAnswer(
+    (invocation) async => hasLatestVersion,
+  );
+
+  locator.registerSingleton<PubService>(service);
+  return service;
+}
+
 // Call this before any service registration helper. This is to ensure that if there
 // is a service registered we remove it first. We register all services to remove boiler plate from tests
 void _removeRegistrationIfExists<T extends Object>() {
@@ -188,6 +215,7 @@ void registerServices() {
   getAndRegisterConfigService();
   getAndRegisterProcessService();
   getAndRegisterAnalyticsService();
+  getAndRegisterPubService();
   // @stacked-mock-helper-register
 }
 
